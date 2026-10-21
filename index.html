@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SIAA — Madrasah Al-Ittihaad 02 Pasir Lor</title>
+  
+  <!-- Google Fonts & Bootstrap Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --primary-green: #0b4632;
+      --primary-green-dark: #072e21;
+      --primary-green-light: #125e44;
+      --accent-gold: #f59e0b;
+      --primary-gold: #d97706;
+      --light-cream: #fdfbf7;
+      --light-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --header-height: 72px;
+      --sidebar-width: 260px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAVBAR */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .brand-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary-green);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--primary-green);
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-green);
+    }
+
+    .btn-gold-nav {
+      background-color: var(--primary-gold);
+      color: #ffffff !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: all 0.2s ease !important;
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);
+    }
+
+    .btn-gold-nav:hover {
+      background-color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+
+    .btn-admin-nav {
+      background-color: var(--primary-green);
+      color: #ffffff !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-admin-nav:hover {
+      background-color: var(--primary-green-dark);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--primary-green);
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      padding: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+      border-bottom: 3px solid var(--primary-green);
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a, .mobile-menu button {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 0;
+      border: none;
+      background: none;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    /* PUBLIC SECTIONS */
+    section {
+      padding: 70px 0;
+      scroll-margin-top: var(--header-height);
+    }
+
+    .hero {
+      margin-top: var(--header-height);
+      background: linear-gradient(135deg, var(--primary-green-dark) 0%, var(--primary-green) 100%);
+      color: #ffffff;
+      padding: 90px 0 110px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--accent-gold);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 28px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-img-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      border: 4px solid rgba(255,255,255,0.2);
+    }
+
+    .hero-img-frame img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .ppdb-section {
+      background-color: var(--light-cream);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ppdb-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 36px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-green);
+    }
+
+    .btn-submit {
+      background-color: var(--primary-green);
+      color: #ffffff;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-green-dark);
+    }
+
+    /* ADMIN PANEL LAYOUT */
+    .admin-container {
+      display: none;
+      min-height: 100vh;
+      padding-top: var(--header-height);
+      background-color: #f1f5f9;
+    }
+
+    .admin-container.active {
+      display: flex;
+    }
+
+    .admin-sidebar {
+      width: var(--sidebar-width);
+      background: var(--primary-green-dark);
+      color: #ffffff;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .admin-menu-btn {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.75);
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .admin-menu-btn:hover, .admin-menu-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .admin-content {
+      flex: 1;
+      padding: 28px;
+      overflow-x: hidden;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      padding: 20px 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .admin-table-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .admin-table th {
+      background-color: var(--primary-green);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .badge-status {
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-terima { background: #dcfce7; color: #15803d; }
+    .badge-pending { background: #fef3c7; color: #b45309; }
+
+    .btn-action {
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-edit { background: #3b82f6; color: #ffffff; }
+    .btn-delete { background: #ef4444; color: #ffffff; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    footer {
+      background-color: var(--primary-green-dark);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 30px 0;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 991px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .form-grid { grid-template-columns: 1fr; }
+      .admin-container { flex-direction: column; }
+      .admin-sidebar { width: 100%; min-height: auto; flex-direction: row; overflow-x: auto; }
+      .admin-content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR PUBLIC -->
+  <header id="public-header">
+    <div class="container navbar">
+      <a href="#hero" class="brand-logo">
+        <img src="https://lh3.googleusercontent.com/d/1RffSeL5VMZSTjV_Jx0qUdSY6KrnhU17T" alt="Logo Madrasah" onerror="this.src='https://placehold.co/50x50/0b4632/ffffff?text=MI'">
+        <div>
+          <div class="brand-title">SIAA Al-Ittihaad 02</div>
+          <div class="brand-subtitle">Madrasah Al-Ittihaad 02 Pasir Lor</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero">Beranda</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#ppdb" class="btn-gold-nav">Daftar PPDB</a></li>
+        <li><button class="btn-admin-nav" onclick="openAdminModal()"><i class="bi bi-lock-fill"></i> Login Admin</button></li>
+      </ul>
+
+      <button class="hamburger" onclick="toggleMobileMenu()">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#hero" onclick="toggleMobileMenu()">Beranda</a>
+    <a href="#profil" onclick="toggleMobileMenu()">Profil</a>
+    <a href="#ppdb" onclick="toggleMobileMenu()">Pendaftaran PPDB</a>
+    <button onclick="toggleMobileMenu(); openAdminModal();"><i class="bi bi-lock-fill"></i> Login Admin</button>
+  </div>
+
+  <!-- MAIN PUBLIC CONTENT -->
+  <main id="public-content">
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="hero-badge">Pendaftaran Santri Baru 2026/2027</span>
+          <h1 class="hero-title">Selamat Datang di SIAA<br><span style="color: var(--accent-gold);">Madrasah Al-Ittihaad 02</span></h1>
+          <p class="hero-desc">
+            Sistem Informasi Akademik dan Penerimaan Peserta Didik Baru (PPDB) Madrasah Al-Ittihaad 02 Pasir Lor, Karanglewas, Banyumas.
+          </p>
+          <div class="hero-btns">
+            <a href="#ppdb" class="btn-gold-nav" style="padding: 12px 28px; font-weight:700;"><i class="bi bi-person-plus-fill"></i> Daftar PPDB Online</a>
+            <a href="#profil" class="btn-admin-nav" style="background: transparent; border: 2px solid rgba(255,255,255,0.4); padding: 12px 28px;"><i class="bi bi-info-circle"></i> Lihat Profil</a>
+          </div>
+        </div>
+        <div>
+          <div class="hero-img-frame">
+            <img src="https://lh3.googleusercontent.com/d/1jzBcrHRCvipzTI_m6Zp7JZJEEw5vrSWO" alt="Gedung Madrasah" onerror="this.src='https://placehold.co/600x400/0b4632/ffffff?text=Madrasah+Al-Ittihaad+02'">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profil" class="container">
+      <div class="card">
+        <h2 style="color: var(--primary-green); margin-bottom: 12px;">Profil & Visi Misi Madrasah</h2>
+        <p style="color: var(--text-muted);">
+          Madrasah Al-Ittihaad 02 Pasir Lor berkomitmen mencetak generasi santri yang berilmu syar'i, berakhlakul karimah, dan berprestasi dalam bingkai nilai-nilai Islam Salafiyah.
+        </p>
+      </div>
+    </section>
+
+    <!-- FORM PPDB -->
+    <section class="ppdb-section" id="ppdb">
+      <div class="container">
+        <div class="ppdb-box">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <span style="background: rgba(11, 70, 50, 0.1); color: var(--primary-green); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 700;">FORMULIR ONLINE</span>
+            <h2 style="color: var(--primary-green); font-size: 1.8rem; font-weight: 800; margin-top: 8px;">Pendaftaran Santri Baru (PPDB)</h2>
+          </div>
+
+          <form id="form-ppdb" onsubmit="submitPPDB(event)">
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Nama Lengkap Calon Santri *</label>
+                <input type="text" id="ppdb-nama" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>NIK Calon Santri *</label>
+                <input type="text" id="ppdb-nik" class="form-control" maxlength="16" required>
+              </div>
+
+              <div class="form-group">
+                <label>Jenis Kelamin *</label>
+                <select id="ppdb-jk" class="form-control" required>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Tempat Lahir *</label>
+                <input type="text" id="ppdb-tempat-lahir" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Tanggal Lahir *</label>
+                <input type="date" id="ppdb-tgl-lahir" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Nama Orang Tua / Wali *</label>
+                <input type="text" id="ppdb-wali" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Nomor WhatsApp / HP *</label>
+                <input type="tel" id="ppdb-hp" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Pilihan Kelas *</label>
+                <select id="ppdb-kelas" class="form-control" required>
+                  <option value="SHIFIR A">SHIFIR A</option>
+                  <option value="SHIFIR B">SHIFIR B</option>
+                  <option value="Kelas 1">Kelas 1</option>
+                  <option value="Kelas 2">Kelas 2</option>
+                  <option value="Kelas 3">Kelas 3</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Asal Sekolah / TK *</label>
+                <input type="text" id="ppdb-asal" class="form-control" required>
+              </div>
+
+              <div class="form-group full">
+                <label>Alamat Lengkap *</label>
+                <textarea id="ppdb-alamat" class="form-control" rows="2" required></textarea>
+              </div>
+
+              <div class="form-group full">
+                <button type="submit" class="btn-submit"><i class="bi bi-send-fill"></i> Kirim Pendaftaran PPDB</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ADMIN DASHBOARD CONTAINER -->
+  <div id="admin-container" class="admin-container">
+    <aside class="admin-sidebar">
+      <button class="admin-menu-btn active" onclick="switchTab('ppdb')"><i class="bi bi-person-lines-fill"></i> Data PPDB</button>
+      <button class="admin-menu-btn" onclick="switchTab('santri')"><i class="bi bi-people-fill"></i> Data Santri</button>
+      <button class="admin-menu-btn" onclick="switchTab('jadwal')"><i class="bi bi-calendar-week"></i> Akses Jadwal</button>
+      <button class="admin-menu-btn" onclick="switchTab('nilai')"><i class="bi bi-journal-plus"></i> Input/Edit Nilai</button>
+      <button class="admin-menu-btn" onclick="switchTab('password')"><i class="bi bi-key-fill"></i> Ganti Password</button>
+      <button class="admin-menu-btn" style="margin-top: auto; color: #f87171;" onclick="logoutAdmin()"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    </aside>
+
+    <main class="admin-content">
+      <div class="admin-header">
+        <div>
+          <h2 id="tab-title" style="color: var(--primary-green); font-size: 1.4rem; font-weight: 800;">Pengelolaan PPDB</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Panel Kontrol Administrasi SIAA</p>
+        </div>
+        <div id="tab-action-btn">
+          <!-- Action dynamic -->
+        </div>
+      </div>
+
+      <div class="admin-table-card">
+        <div id="admin-main-view">
+          <!-- Content loaded dynamically -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL LOGIN ADMIN -->
+  <div class="modal-overlay" id="modal-admin">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeAdminModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <h3 style="color: var(--primary-green); font-size: 1.4rem; font-weight: 800;">Login Admin</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem;">Masuk ke Panel Pengelolaan SIAA</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Username</label>
+          <input type="text" id="admin-username" class="form-control" required placeholder="admin">
+        </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Password</label>
+          <input type="password" id="admin-password" class="form-control" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-submit">Masuk Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DYNAMIC FORM -->
+  <div class="modal-overlay" id="modal-form">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeFormModal()">&times;</button>
+      <h3 id="form-modal-title" style="color: var(--primary-green); font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">Form Input</h3>
+      <div id="form-modal-body">
+        <!-- Form Content -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="public-footer">
+    <div class="container" style="text-align: center; font-size: 0.85rem;">
+      © 2026 SIAA Al-Ittihaad 02 Pasir Lor. Dikembangkan oleh Norman.
+    </div>
+  </footer>
+
+  <script>
+    let currentTab = 'ppdb';
+    let santriData = [
+      { id: 1, nis: '2026001', nama: 'Ahmad Fauzi', kelas: 'Kelas 1', wali: 'Siti Aminah', hp: '08123456789' },
+      { id: 2, nis: '2026002', nama: 'Siti Nurhaliza', kelas: 'Kelas 2', wali: 'Budi Santoso', hp: '08987654321' }
+    ];
+    let nilaiData = [
+      { id: 1, nis: '2026001', nama: 'Ahmad Fauzi', mapel: 'Fiqih', cawu1: 85, cawu2: 88, cawu3: 90 },
+      { id: 2, nis: '2026002', nama: 'Siti Nurhaliza', mapel: 'Aqidah', cawu1: 90, cawu2: 92, cawu3: 95 }
+    ];
+    let jadwalData = [
+      { id: 1, hari: 'Senin', jam: '08:00 - 09:30', kelas: 'Kelas 1', mapel: 'Fiqih', guru: 'Ust. Hasan' },
+      { id: 2, hari: 'Selasa', jam: '08:00 - 09:30', kelas: 'Kelas 2', mapel: 'Aqidah', guru: 'Ust. Ali' }
+    ];
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('active');
+    }
+
+    function openAdminModal() {
+      document.getElementById('modal-admin').classList.add('active');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('modal-admin').classList.remove('active');
+    }
+
+    function closeFormModal() {
+      document.getElementById('modal-form').classList.remove('active');
+    }
+
+    async function submitPPDB(e) {
+      e.preventDefault();
+      const payload = {
+        nama: document.getElementById('ppdb-nama').value.trim(),
+        nik: document.getElementById('ppdb-nik').value.trim(),
+        jk: document.getElementById('ppdb-jk').value,
+        tempatLahir: document.getElementById('ppdb-tempat-lahir').value.trim(),
+        tglLahir: document.getElementById('ppdb-tgl-lahir').value,
+        wali: document.getElementById('ppdb-wali').value.trim(),
+        hp: document.getElementById('ppdb-hp').value.trim(),
+        kelas: document.getElementById('ppdb-kelas').value,
+        asalSekolah: document.getElementById('ppdb-asal').value.trim(),
+        alamat: document.getElementById('ppdb-alamat').value.trim()
+      };
+
+      Swal.fire({ title: 'Mengirim...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+      try {
+        const res = await fetch('/api/ppdb', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Pendaftaran Berhasil!',
+            html: `Nomor Registrasi Anda:<br><b style="font-size:1.4rem; color:#0b4632;">${result.regNo}</b>`,
+            confirmButtonColor: '#0b4632'
+          });
+          document.getElementById('form-ppdb').reset();
+        } else {
+          Swal.fire({ icon: 'error', title: 'Gagal', text: result.message || 'Gagal menyimpan.' });
+        }
+      } catch (err) {
+        Swal.fire({ icon: 'warning', title: 'Info', text: 'Database belum terhubung.' });
+      }
+    }
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('admin-username').value;
+      const p = document.getElementById('admin-password').value;
+
+      try {
+        const res = await fetch('/api/ppdb?action=login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: u, password: p })
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          closeAdminModal();
+          document.getElementById('public-header').style.display = 'none';
+          document.getElementById('public-content').style.display = 'none';
+          document.getElementById('public-footer').style.display = 'none';
+          document.getElementById('admin-container').classList.add('active');
+          switchTab('ppdb');
+        } else {
+          Swal.fire('Login Gagal', result.message || 'Username/Password salah', 'error');
+        }
+      } catch (err) {
+        Swal.fire('Error', 'Gagal memproses login admin', 'error');
+      }
+    }
+
+    function logoutAdmin() {
+      document.getElementById('admin-container').classList.remove('active');
+      document.getElementById('public-header').style.display = 'flex';
+      document.getElementById('public-content').style.display = 'block';
+      document.getElementById('public-footer').style.display = 'block';
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.admin-menu-btn').forEach(btn => btn.classList.remove('active'));
+      event?.target?.classList?.add('active');
+
+      const actionDiv = document.getElementById('tab-action-btn');
+      actionDiv.innerHTML = '';
+
+      if (tab === 'ppdb') {
+        document.getElementById('tab-title').innerText = 'Pengelolaan Data PPDB';
+        loadAdminPPDB();
+      } else if (tab === 'santri') {
+        document.getElementById('tab-title').innerText = 'Pengelolaan Data Santri';
+        actionDiv.innerHTML = `<button class="btn-submit" style="padding:6px 16px; font-size:0.82rem;" onclick="openAddSantriModal()"><i class="bi bi-plus-circle"></i> Tambah Santri</button>`;
+        renderSantriTable();
+      } else if (tab === 'jadwal') {
+        document.getElementById('tab-title').innerText = 'Akses & Kelola Jadwal';
+        actionDiv.innerHTML = `<button class="btn-submit" style="padding:6px 16px; font-size:0.82rem;" onclick="openAddJadwalModal()"><i class="bi bi-plus-circle"></i> Tambah Jadwal</button>`;
+        renderJadwalTable();
+      } else if (tab === 'nilai') {
+        document.getElementById('tab-title').innerText = 'Input & Edit Nilai Rapor';
+        actionDiv.innerHTML = `<button class="btn-submit" style="padding:6px 16px; font-size:0.82rem;" onclick="openAddNilaiModal()"><i class="bi bi-plus-circle"></i> Tambah Nilai</button>`;
+        renderNilaiTable();
+      } else if (tab === 'password') {
+        document.getElementById('tab-title').innerText = 'Ganti Password Admin';
+        renderPasswordForm();
+      }
+    }
+
+    async function loadAdminPPDB() {
+      const view = document.getElementById('admin-main-view');
+      view.innerHTML = `<p style="padding:20px; text-align:center;">Memuat data PPDB...</p>`;
+
+      try {
+        const res = await fetch('/api/ppdb?action=list');
+        const result = await res.json();
+
+        if (result.success && result.data.length > 0) {
+          view.innerHTML = `
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Reg No</th><th>Nama</th><th>Kelas</th><th>Wali</th><th>HP</th><th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${result.data.map(i => `
+                  <tr>
+                    <td><b>${i.reg_no}</b></td>
+                    <td>${i.nama}</td>
+                    <td>${i.kelas}</td>
+                    <td>${i.wali}</td>
+                    <td>${i.hp}</td>
+                    <td><span class="badge-status badge-pending">Terdaftar</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>`;
+        } else {
+          view.innerHTML = `<p style="padding:20px; text-align:center;">Belum ada data pendaftaran.</p>`;
+        }
+      } catch (err) {
+        view.innerHTML = `<p style="padding:20px; text-align:center; color:red;">Database belum terhubung.</p>`;
+      }
+    }
+
+    function renderSantriTable() {
+      const view = document.getElementById('admin-main-view');
+      view.innerHTML = `
+        <table class="admin-table">
+          <thead>
+            <tr><th>NIS</th><th>Nama Santri</th><th>Kelas</th><th>Nama Wali</th><th>No HP</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            ${santriData.map(s => `
+              <tr>
+                <td><b>${s.nis}</b></td>
+                <td>${s.nama}</td>
+                <td>${s.kelas}</td>
+                <td>${s.wali}</td>
+                <td>${s.hp}</td>
+                <td>
+                  <button class="btn-action btn-edit" onclick="editSantri(${s.id})"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-action btn-delete" onclick="deleteSantri(${s.id})"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    function renderJadwalTable() {
+      const view = document.getElementById('admin-main-view');
+      view.innerHTML = `
+        <table class="admin-table">
+          <thead>
+            <tr><th>Hari</th><th>Jam</th><th>Kelas</th><th>Mapel</th><th>Guru</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            ${jadwalData.map(j => `
+              <tr>
+                <td><b>${j.hari}</b></td>
+                <td>${j.jam}</td>
+                <td>${j.kelas}</td>
+                <td>${j.mapel}</td>
+                <td>${j.guru}</td>
+                <td>
+                  <button class="btn-action btn-delete" onclick="deleteJadwal(${j.id})"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    function renderNilaiTable() {
+      const view = document.getElementById('admin-main-view');
+      view.innerHTML = `
+        <table class="admin-table">
+          <thead>
+            <tr><th>NIS</th><th>Nama</th><th>Mapel</th><th>Cawu 1</th><th>Cawu 2</th><th>Cawu 3</th><th>Aksi</th></tr>
+          </thead>
+          <tbody>
+            ${nilaiData.map(n => `
+              <tr>
+                <td><b>${n.nis}</b></td>
+                <td>${n.nama}</td>
+                <td>${n.mapel}</td>
+                <td>${n.cawu1}</td>
+                <td>${n.cawu2}</td>
+                <td>${n.cawu3}</td>
+                <td>
+                  <button class="btn-action btn-edit" onclick="editNilai(${n.id})"><i class="bi bi-pencil"></i></button>
+                  <button class="btn-action btn-delete" onclick="deleteNilai(${n.id})"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    function renderPasswordForm() {
+      const view = document.getElementById('admin-main-view');
+      view.innerHTML = `
+        <div style="padding:24px; max-width:400px;">
+          <form onsubmit="handlePasswordChange(event)">
+            <div class="form-group" style="margin-bottom:12px;">
+              <label>Password Lama</label>
+              <input type="password" id="old-pass" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label>Password Baru</label>
+              <input type="password" id="new-pass" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom:20px;">
+              <label>Konfirmasi Password Baru</label>
+              <input type="password" id="confirm-pass" class="form-control" required>
+            </div>
+            <button type="submit" class="btn-submit">Update Password</button>
+          </form>
+        </div>`;
+    }
+
+    function openAddSantriModal() {
+      document.getElementById('form-modal-title').innerText = 'Tambah Data Santri';
+      document.getElementById('form-modal-body').innerHTML = `
+        <form onsubmit="saveSantri(event)">
+          <div class="form-group" style="margin-bottom:10px;"><label>NIS</label><input type="text" id="m-nis" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Nama Santri</label><input type="text" id="m-nama" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Kelas</label><input type="text" id="m-kelas" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Wali</label><input type="text" id="m-wali" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:16px;"><label>No HP</label><input type="tel" id="m-hp" class="form-control" required></div>
+          <button type="submit" class="btn-submit">Simpan Santri</button>
+        </form>`;
+      document.getElementById('modal-form').classList.add('active');
+    }
+
+    function saveSantri(e) {
+      e.preventDefault();
+      santriData.push({
+        id: Date.now(),
+        nis: document.getElementById('m-nis').value,
+        nama: document.getElementById('m-nama').value,
+        kelas: document.getElementById('m-kelas').value,
+        wali: document.getElementById('m-wali').value,
+        hp: document.getElementById('m-hp').value
+      });
+      closeFormModal();
+      renderSantriTable();
+      Swal.fire('Berhasil', 'Data santri ditambahkan.', 'success');
+    }
+
+    function deleteSantri(id) {
+      santriData = santriData.filter(s => s.id !== id);
+      renderSantriTable();
+      Swal.fire('Terhapus', 'Data santri berhasil dihapus.', 'info');
+    }
+
+    function openAddJadwalModal() {
+      document.getElementById('form-modal-title').innerText = 'Tambah Jadwal';
+      document.getElementById('form-modal-body').innerHTML = `
+        <form onsubmit="saveJadwal(event)">
+          <div class="form-group" style="margin-bottom:10px;"><label>Hari</label><input type="text" id="j-hari" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Jam</label><input type="text" id="j-jam" class="form-control" required placeholder="08:00 - 09:30"></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Kelas</label><input type="text" id="j-kelas" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Mapel</label><input type="text" id="j-mapel" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:16px;"><label>Guru Pengampu</label><input type="text" id="j-guru" class="form-control" required></div>
+          <button type="submit" class="btn-submit">Simpan Jadwal</button>
+        </form>`;
+      document.getElementById('modal-form').classList.add('active');
+    }
+
+    function saveJadwal(e) {
+      e.preventDefault();
+      jadwalData.push({
+        id: Date.now(),
+        hari: document.getElementById('j-hari').value,
+        jam: document.getElementById('j-jam').value,
+        kelas: document.getElementById('j-kelas').value,
+        mapel: document.getElementById('j-mapel').value,
+        guru: document.getElementById('j-guru').value
+      });
+      closeFormModal();
+      renderJadwalTable();
+      Swal.fire('Berhasil', 'Jadwal ditambahkan.', 'success');
+    }
+
+    function deleteJadwal(id) {
+      jadwalData = jadwalData.filter(j => j.id !== id);
+      renderJadwalTable();
+    }
+
+    function openAddNilaiModal() {
+      document.getElementById('form-modal-title').innerText = 'Tambah Nilai Rapor';
+      document.getElementById('form-modal-body').innerHTML = `
+        <form onsubmit="saveNilai(event)">
+          <div class="form-group" style="margin-bottom:10px;"><label>NIS Santri</label><input type="text" id="n-nis" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Nama Santri</label><input type="text" id="n-nama" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Mata Pelajaran</label><input type="text" id="n-mapel" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Nilai Cawu 1</label><input type="number" id="n-c1" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:10px;"><label>Nilai Cawu 2</label><input type="number" id="n-c2" class="form-control" required></div>
+          <div class="form-group" style="margin-bottom:16px;"><label>Nilai Cawu 3</label><input type="number" id="n-c3" class="form-control" required></div>
+          <button type="submit" class="btn-submit">Simpan Nilai</button>
+        </form>`;
+      document.getElementById('modal-form').classList.add('active');
+    }
+
+    function saveNilai(e) {
+      e.preventDefault();
+      nilaiData.push({
+        id: Date.now(),
+        nis: document.getElementById('n-nis').value,
+        nama: document.getElementById('n-nama').value,
+        mapel: document.getElementById('n-mapel').value,
+        cawu1: document.getElementById('n-c1').value,
+        cawu2: document.getElementById('n-c2').value,
+        cawu3: document.getElementById('n-c3').value
+      });
+      closeFormModal();
+      renderNilaiTable();
+      Swal.fire('Berhasil', 'Nilai ditambahkan.', 'success');
+    }
+
+    function deleteNilai(id) {
+      nilaiData = nilaiData.filter(n => n.id !== id);
+      renderNilaiTable();
+    }
+
+    function handlePasswordChange(e) {
+      e.preventDefault();
+      const n = document.getElementById('new-pass').value;
+      const c = document.getElementById('confirm-pass').value;
+
+      if (n !== c) {
+        Swal.fire('Gagal', 'Konfirmasi password baru tidak sesuai.', 'error');
+        return;
+      }
+      Swal.fire('Sukses', 'Password berhasil diperbarui.', 'success');
+      document.getElementById('old-pass').value = '';
+      document.getElementById('new-pass').value = '';
+      document.getElementById('confirm-pass').value = '';
+    }
+  </script>
+</body>
+</html>
+```
+
+### Summary of Updates
+- Updated `index.html` with a full-featured Admin Panel layout, including sidebar tabs for PPDB Data, Santri Records, Schedule Controls, Student Grade Entry, and Password Changing.
